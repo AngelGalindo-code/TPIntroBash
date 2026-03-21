@@ -19,28 +19,28 @@ while [ $opc -ne 6 ]; do
 
 		1)
 			clear
-                 		echo "Creando carpetas..."
-                 	sleep 2
+            	echo "Creando carpetas..."
+            sleep 2
 
-                 	mkdir -p  $HOME/EPNro1/entrada $HOME/EPNro1/salida $HOME/EPNro1/procesado
+            mkdir -p  $HOME/EPNro1/entrada $HOME/EPNro1/salida $HOME/EPNro1/procesado
 
-                 	ls $HOME/EPNro1
-                 	;;
+            ls $HOME/EPNro1
+            ;;
 
 		2)
 			clear
-                		echo "Creando archivo..."
-                	sleep 2
+            echo "Creando archivo..."
+            sleep 2
 
-                	archivo="$HOME/EPNro1/salida/$FILENAME.txt"
-				touch $archivo
+            archivo="$HOME/EPNro1/salida/$FILENAME.txt"
+			touch $archivo
 
-                	if [ -f  "$archivo" ]; then
-                        	echo "Archivo creado exitosamente. Iniciando iniciando proceso background "
+            if [ -f  "$archivo" ]; then
+            echo "Archivo creado exitosamente. Iniciando iniciando proceso background "
 
-				bash "$HOME/EPNro1/consolidar.sh" &
-                	else
-                        	echo "No se pudo crear el archivo"
+			bash "$HOME/EPNro1/consolidar.sh" &
+            else
+            echo "No se pudo crear el archivo"
 
 			fi
 			;;
