@@ -89,7 +89,7 @@ while [ $opc -ne 6 ]; do
 			;;
 
 
-		6 
+		6) 
 			clear
 				echo "Saliendo..."
 			sleep 2
