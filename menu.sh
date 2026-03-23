@@ -8,18 +8,18 @@ epnro1="$HOME/EPNro1"
 entrada="$HOME/EPNro1/entrada"
 salida="$HOME/EPNro1/salida"
 procesado="$HOME/EPNro1/procesado"
-filename="$HOME/EPNro1/salida/FILENAME.txt"
+filename="$HOME/EPNro1/salida/$FILENAME.txt"
 
 if [  "$1"  ==  "-d" ]; then
-	if [  -d  "$HOME/EPNro1" ] ;     then
- 		echo "Borrando entorno y       procesos...	"
+	if [  -d  "$HOME/EPNro1" ] ; then
+ 		echo "Borrando entorno y  procesos...	"
 		sleep 2
  		rm -r "$HOME/EPNro1"
  		pkill -f consolidar.sh
  		clear
  		echo "Entorno y procesos eliminados."
 	else
-  				echo "El entorno no existe."
+  		echo "El entorno no existe."
  	fi
  	exit
 fi
