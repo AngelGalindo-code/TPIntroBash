@@ -11,15 +11,15 @@ procesado="$HOME/EPNro1/procesado"
 filename="$HOME/EPNro1/salida/$FILENAME.txt"
 
 if [  "$1"  ==  "-d" ]; then
-	if [  -d  "$HOME/EPNro1" ] ; then
- 		echo "Borrando entorno y  procesos...	"
+	if [  -d  "$HOME/EPNro1" ]; then
+ 		echo "Borrando entorno y procesos...	"
 		sleep 2
  		rm -r "$HOME/EPNro1"
  		pkill -f consolidar.sh
  		clear
  		echo "Entorno y procesos eliminados."
 	else
-  		echo "El entorno no existe."
+  	   echo "El entorno no existe."
  	fi
  	exit
 fi
@@ -45,7 +45,7 @@ while [ $opc -ne 6 ]; do
 			echo "Creando carpetas..."
             sleep 2
 
-            mkdir -p  $entrada $salida $procesado
+            mkdir -p  "$entrada" "$salida" "$procesado"
             ls "$epnro1"
             ;;
 
@@ -62,9 +62,9 @@ while [ $opc -ne 6 ]; do
 		3)
 			clear
 
-			if [ -f "$archivo" ]; then
+			if [ -f "$filename" ]; then
 				echo "Listado de alumnos ordenado por padron:"
-				sort -nr "$archivo" | cat $filename
+				sort -nr "$filename" | cat $filename
 			else
 				echo "Archivo inexistente"
 			fi
@@ -74,9 +74,9 @@ while [ $opc -ne 6 ]; do
 		4)
 		  	clear
 
-			if [ -f "$archivo" ]; then
+			if [ -f "$filename" ]; then
 
-		 		sort -k5,5nr "$archivo" | head
+		 		sort -k5,5nr "$filename" | head
 			else
 				echo "Archivo inexistente."
 			fi
@@ -89,7 +89,7 @@ while [ $opc -ne 6 ]; do
 	        echo "Digite el padron:"
 			read padron
 
-      		if [ -f "$archivo" ]; then
+      		if [ -f "$filename" ]; then
 				grep "$padron" "$filename"
 
 			else
