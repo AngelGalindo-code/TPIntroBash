@@ -10,19 +10,19 @@ salida="$HOME/EPNro1/salida"
 procesado="$HOME/EPNro1/procesado"
 filename="$HOME/EPNro1/salida/FILENAME.txt"
 
-		if [  "$1"  ==  -d ]; then
- 			if [  -d  "$HOME/EPNro1" ] ;     then
- 				echo "Borrando entorno y       procesos...	"
-			sleep 2
- 				rm -r "$HOME/EPNro1"
- 			pkill -f consolidar.sh
- 			clear
- 				echo "Entorno y procesos eliminados."
-			else
+if [  "$1"  ==  "-d" ]; then
+	if [  -d  "$HOME/EPNro1" ] ;     then
+ 		echo "Borrando entorno y       procesos...	"
+		sleep 2
+ 		rm -r "$HOME/EPNro1"
+ 		pkill -f consolidar.sh
+ 		clear
+ 		echo "Entorno y procesos eliminados."
+	else
   				echo "El entorno no existe."
- 		fi
- 		exit
-		fi
+ 	fi
+ 	exit
+fi
 
 while [ $opc -ne 6 ]; do
 
@@ -41,21 +41,22 @@ while [ $opc -ne 6 ]; do
         case $opc in
 		1)
 			clear
-            			echo "Creando carpetas..."
-            		sleep 2
+            
+			echo "Creando carpetas..."
+            sleep 2
 
-            			mkdir -p  $HOME/EPNro1/entrada $HOME/EPNro1/salida $HOME/EPNro1/procesado
-
-            		ls "$epnro1"
-            		;;
+            mkdir -p  $entrada" $salida" $procesado
+            ls "$epnro1"
+            ;;
 
 		2)
-			2)clear
-        			echo "Corriendo proceso..."
-        			bash $HOME/consolidar.sh
-        		sleep 2
-        			echo "Proceso finalizado!"
-        		;;
+			clear
+        			
+			echo "Corriendo proceso..."
+        	bash $HOME/consolidar.sh &
+        	sleep 2
+        	echo "Proceso finalizado!"
+        	;;
 
 
 		3)
@@ -85,10 +86,10 @@ while [ $opc -ne 6 ]; do
 		5)
 			clear
 
-	        		echo "Digite el padron:"
+	        echo "Digite el padron:"
 			read padron
 
-      			if [ -f "$archivo" ]; then
+      		if [ -f "$archivo" ]; then
 				grep "$padron" "$filename"
 
 			else
@@ -100,10 +101,10 @@ while [ $opc -ne 6 ]; do
 
 		6)
 			clear
-				echo "Saliendo..."
+			echo "Saliendo..."
 			;;
 		*) 	clear
-				echo "Opcion invalida."
+			echo "Opcion invalida."
 			;;
 			esac
 
