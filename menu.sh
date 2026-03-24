@@ -10,19 +10,27 @@ salida="$HOME/EPNro1/salida"
 procesado="$HOME/EPNro1/procesado"
 filename="$HOME/EPNro1/salida/$FILENAME.txt"
 
-if [  "$1"  ==  "-d" ]; then
-	if [  -d  "$HOME/EPNro1" ]; then
- 		echo "Borrando entorno y procesos...	"
-		sleep 2
- 		rm -r "$HOME/EPNro1"
- 		pkill -f consolidar.sh
+	if [ "$1" == "-d" ]; then
+ 		echo "Comprobando que el directorio existe..."
+ 		sleep 2
  		clear
- 		echo "Entorno y procesos eliminados."
-	else
-  	   echo "El entorno no existe."
- 	fi
- 	exit
-fi
+ 		if [ -n "$HOME" ] && [ -d "$HOME/EPNro1" ]; then
+   			echo "Directorio encontrado."
+   		sleep 2
+   		clear
+   			echo "Borrando entorno y procesos..."
+   		sleep 2
+   			#pkill solo detiene el proceso del consolidar
+   			#pero si esta en EPNro1, consolidar sera borrado
+   			pkill -f "consolidar.sh"
+   			rm -rf "$HOME/EPNro1"
+   		clear
+   			echo "Entorno y procesos eliminados correctamente."
+ 		else 
+   			echo "El directorio no existe."
+ 		fi
+ 		exit
+	fi
 
 while [ $opc -ne 6 ]; do
 
