@@ -105,9 +105,8 @@ while [ $opc -ne 6 ]; do
 			fi
 			sleep 2
 			;;
-
-
 		6)
+
 			clear
 			echo "Saliendo..."
 			;;
