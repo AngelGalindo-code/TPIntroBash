@@ -72,7 +72,7 @@ while [ $opc -ne 6 ]; do
 
 			if [ -f "$filename" ]; then
 				echo "Listado de alumnos ordenado por padron:"
-				sort -nr "$filename" | cat $filename
+				sort -k1,1 -nr "$filename" 
 			else
 				echo "Archivo inexistente"
 			fi
