@@ -4,55 +4,75 @@
 
 opc=0
 
+epnro1="$HOME/EPNro1"
+entrada="$HOME/EPNro1/entrada"
+salida="$HOME/EPNro1/salida"
+procesado="$HOME/EPNro1/procesado"
+filename="$HOME/EPNro1/salida/$FILENAME.txt"
+
+	if [ "$1" == "-d" ]; then
+ 		echo "Comprobando que el directorio existe..."
+ 		sleep 2
+ 		clear
+ 		if [ -n "$HOME" ] && [ -d "$HOME/EPNro1" ]; then
+   			echo "Directorio encontrado."
+   		sleep 2
+   		clear
+   			echo "Borrando entorno y procesos..."
+   		sleep 2
+   			#pkill solo detiene el proceso del consolidar
+   			#pero si esta en EPNro1, consolidar sera borrado
+   			pkill -f "consolidar.sh"
+   			rm -rf "$HOME/EPNro1"
+   		clear
+   			echo "Entorno y procesos eliminados correctamente."
+ 		else 
+   			echo "El directorio no existe."
+ 		fi
+ 		exit
+	fi
+
 while [ $opc -ne 6 ]; do
 
-	echo "[1] Crear entorno: entrada, salida y procesado"
-	echo "[2] Correr proceso"
-	echo "[3] Mostrar listado de alumnos (ordenado por padron)"
-	echo "[4] Mostrar las 10 notas mas altas."
-	echo "[5] Buscar alumno por padron."
-	echo "[6] Salir."
+	 echo "        MENU         "
+    	echo "[1] Crear entorno: EPNro1, entrada, salida y proceso"
+    	echo "[2] Correr proceso"
+    	echo "[3] Mostrar listado de alumnos(ordenado por padron)"
+    	echo "[4] Mostar las 10 notas mas altas"
+    	echo "[5] Buscar alumno por padron"
+    	echo "[6] Salir"
+    	echo ""
+    	echo "Ingrese un opcion: "
 
 	read opc
 
         case $opc in
-
 		1)
 			clear
-            	echo "Creando carpetas..."
+            
+			echo "Creando carpetas..."
             sleep 2
-
-            mkdir -p  $HOME/EPNro1/entrada $HOME/EPNro1/salida $HOME/EPNro1/procesado
-
-            ls $HOME/EPNro1
+			echo "Lista de archivos en EPNro1:"
+            mkdir -p  "$entrada" "$salida" "$procesado"
+            ls "$epnro1"
             ;;
 
 		2)
 			clear
-            echo "Creando archivo..."
-            sleep 2
-
-            archivo="$HOME/EPNro1/salida/$FILENAME.txt"
-			touch $archivo
-
-            if [ -f  "$archivo" ]; then
-            echo "Archivo creado exitosamente. Iniciando iniciando proceso background "
-
-			bash "$HOME/EPNro1/consolidar.sh" &
-            else
-            echo "No se pudo crear el archivo"
-
-			fi
-			;;
+        			
+			echo "Corriendo proceso..."
+        	bash ./consolidar.sh &
+        	sleep 2
+        	echo "Proceso finalizado!"
+        	;;
 
 
 		3)
 			clear
-			archivo="$HOME/EPNro1/salida/$FILENAME.txt"
 
-			if [ -f "$archivo" ]; then
+			if [ -f "$filename" ]; then
 				echo "Listado de alumnos ordenado por padron:"
-				sort -nr "$archivo" | cat $archivo
+				sort -nr "$filename" | cat $filename
 			else
 				echo "Archivo inexistente"
 			fi
@@ -61,11 +81,10 @@ while [ $opc -ne 6 ]; do
 
 		4)
 		  	clear
-			archivo="$HOME/EPNro1/salida/$FILENAME.txt"
 
-			if [ -f "$archivo" ]; then
+			if [ -f "$filename" ]; then
 
-		 		sort -k5,5nr "$archivo" | head
+		 		sort -k5,5nr "$filename" | head
 			else
 				echo "Archivo inexistente."
 			fi
@@ -74,29 +93,26 @@ while [ $opc -ne 6 ]; do
 
 		5)
 			clear
-	        	archivo="$HOME/EPNro1/salida/$FILENAME.txt"
 
-	        		echo "Digite el padron:"
+	        echo "Digite el padron:"
 			read padron
 
-      			if [ -f "$archivo" ]; then
-				grep "$padron" "$archivo"
+      		if [ -f "$filename" ]; then
+				grep "$padron" "$filename"
 
 			else
 				echo "Padron inexistente."
 			fi
 			sleep 2
 			;;
+		6)
 
-
-		6) 
 			clear
-				echo "Saliendo..."
-			sleep 2
+			echo "Saliendo..."
 			;;
 		*) 	clear
-				echo "Opcion invalida."
+			echo "Opcion invalida."
 			;;
 			esac
 
-			done
+done
