@@ -44,7 +44,7 @@ while [ $opc -ne 6 ]; do
             
 			echo "Creando carpetas..."
             sleep 2
-
+			echo "Lista de archivos en EPNro1:"
             mkdir -p  "$entrada" "$salida" "$procesado"
             ls "$epnro1"
             ;;
