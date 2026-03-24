@@ -63,7 +63,7 @@ while [ $opc -ne 6 ]; do
 			echo "Corriendo proceso..."
         	bash ./consolidar.sh &
         	sleep 2
-        	echo "Proceso finalizado!"
+        	echo "Proceso en background"
         	;;
 
 
