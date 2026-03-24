@@ -53,7 +53,7 @@ while [ $opc -ne 6 ]; do
 			clear
         			
 			echo "Corriendo proceso..."
-        	bash $HOME/consolidar.sh &
+        	bash ./consolidar.sh &
         	sleep 2
         	echo "Proceso finalizado!"
         	;;
